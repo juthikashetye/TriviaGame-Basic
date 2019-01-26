@@ -16,28 +16,53 @@ for (var i = 0; i < questionBank.length; i++) {
 	list.html(questionBank[i].question + "<br>");
 
 	var option = $("<input>");
-	option.text(questionBank[i].option1);
-	option.attr("type","radio");
-	list.append(option);
+	var label = $("<label>");
+	label.attr("for",questionBank[i].option1)
+		 .text(questionBank[i].option1);
 
-	var option = $("<input>");
-	option.text(questionBank[i].option2);
-	option.attr("type","radio");
-	list.append(option);
-
-	var option = $("<input>");
-	option.text(questionBank[i].option3);
-	option.attr("type","radio");
-	list.append(option);
-
-	var option = $("<input>");
-	option.text(questionBank[i].option4);
-	option.attr("type","radio");
-	list.append(option);
+	option.attr("type","radio")
+		  .attr("name",questionBank[i].name)
+		  .attr("id",questionBank[i].option1);
 	
-	// option.attr("type","radio");
-	// list.html(questionBank[i].question + "<br>");
-	// list.append(options);
+	list.append(option);
+	list.append(label);
+
+	var option = $("<input>");
+	var label = $("<label>");
+	label.attr("for",questionBank[i].option2)
+		 .text(questionBank[i].option2);
+
+	option.attr("type","radio")
+		  .attr("name",questionBank[i].name)
+		  .attr("id",questionBank[i].option2);
+	
+	list.append(option);
+	list.append(label);
+
+	var option = $("<input>");
+	var label = $("<label>");
+	label.attr("for",questionBank[i].option3)
+		 .text(questionBank[i].option3);
+
+	option.attr("type","radio")
+			.attr("name",questionBank[i].name)
+			.attr("id",questionBank[i].option3);
+	
+	list.append(option);
+	list.append(label);
+
+	var option = $("<input>");
+	var label = $("<label>");
+	label.attr("for",questionBank[i].option4)
+		 .text(questionBank[i].option4);
+		 
+	option.attr("type","radio")
+			.attr("name",questionBank[i].name)
+			.attr("id",questionBank[i].option4);
+	
+	list.append(option);
+	list.append(label);
+	
 	$("form ol").append(list);
 
 }
