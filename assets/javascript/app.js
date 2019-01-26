@@ -6,17 +6,58 @@ var runTimer;
 
 function firstDisplay(){
 	$("#time, form").hide();
+	startEventListener();
 }
 firstDisplay();
+
+function addQuestion(){
+for (var i = 0; i < questionBank.length; i++) {
+	var list = $("<li>");
+	list.html(questionBank[i].question + "<br>");
+
+	var option = $("<input>");
+	option.text(questionBank[i].option1);
+	option.attr("type","radio");
+	list.append(option);
+
+	var option = $("<input>");
+	option.text(questionBank[i].option2);
+	option.attr("type","radio");
+	list.append(option);
+
+	var option = $("<input>");
+	option.text(questionBank[i].option3);
+	option.attr("type","radio");
+	list.append(option);
+
+	var option = $("<input>");
+	option.text(questionBank[i].option4);
+	option.attr("type","radio");
+	list.append(option);
+	
+	// option.attr("type","radio");
+	// list.html(questionBank[i].question + "<br>");
+	// list.append(options);
+	$("form ol").append(list);
+
+}
+}
+addQuestion();
 
 function startEventListener(){
 	$("#startButton").on("click",function(){
 		$("#time, form").show();
+		$("#startButton").hide();
 		//Call the run function in order to start the timer    
 		run();
 	});
 }
-startEventListener();
+
+function resetGameEventListener(){
+	$(".reset").on("click",function(){
+		location.reload();
+	});
+}
 
 //Starts the countdown timer
 function run() {
@@ -24,7 +65,7 @@ function run() {
 	//our new runTimer will not allow multiple instances.
       clearInterval(runTimer);
       runTimer = setInterval(timer, 1000);
-    }
+}
 
 function timer(){
 	//Decrease the countdown
@@ -43,17 +84,18 @@ function timer(){
 		//Create 'p' tags with updated text
 		//and append to content div
 		var result = $("<p>" + "<p>" + "<p>");
-		var resetButton = $("<button>").text("Play Again");
+		var resetButton = $("<button>").addClass("reset").text("Play Again");
 		result.eq(0).text("Correct answers : "+ correctAns);
 		result.eq(1).text("Inorrect answers : "+ wrongAns);
 		result.eq(2).text("Unanswered : "+ notAns);
 		$("#content").append(result, resetButton);
+		resetGameEventListener();
  	}
 }
 
 //Stops the timer
 function stop() {
-    //  Clears our runTimer
+    //  Clears runTimer
     clearInterval(runTimer);
 }
 
