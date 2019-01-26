@@ -2,12 +2,35 @@
 <html>
 <head>
 	<title>Trivia Game</title>
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 </head>
 <body>
-<h1>Totally Trivial Trivia</h1>
-<p>Time Remaining: <span></span></p>
-<div id="content"></div>
+<div class="container">
 
+<h1>Totally Trivial Trivia</h1>
+
+<p id="time">Time Remaining: <span></span></p>
+
+<div id="content">
+	<form>
+	<ol>
+	<li>What country produces the most potatoes?</li>
+	<input type="radio" name="potatoes" value="china"> China
+  	<input type="radio" name="potatoes" value="usa"> United States
+  	<input type="radio" name="potatoes" value="ireland"> Ireland
+  	<input type="radio" name="potatoes" value="russia"> Russia
+
+  	<li>In what country would you most likely find chapati on the menu?</li>
+  	<input type="radio" name="chapati" value="italy"> Italy
+  	<input type="radio" name="chapati" value="iraq"> Iraq
+  	<input type="radio" name="chapati" value="india"> India
+  	<input type="radio" name="chapati" value="iran"> Iran
+  	</ol>
+  	</form>
+</div>
+
+<button id="startButton">Start</button>
+</div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="assets/javascript/app.js"></script>
 </body>
