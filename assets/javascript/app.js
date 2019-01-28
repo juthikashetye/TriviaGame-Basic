@@ -1,73 +1,91 @@
-var countdown = 5;
+var countdown = 50;
 var correctAns = 0;
 var wrongAns = 0;
 var notAns = 0;
 var runTimer;
+var numOptions = 4;
 
 function firstDisplay(){
 	$("#time, form").hide();
 	startEventListener();
 }
-firstDisplay();
 
 function addQuestion(){
-for (var i = 0; i < questionBank.length; i++) {
+  for (var i = 0; i < questionBank.length; i++) {
 	var list = $("<li>");
 	list.html(questionBank[i].question + "<br>");
 
-	var option = $("<input>");
-	var label = $("<label>");
-	label.attr("for",questionBank[i].option1)
-		 .text(questionBank[i].option1);
+	// var option = $("<input>");
+	// var label = $("<label>");
+	// label.attr("for",questionBank[i].option1)
+	// 	 .text(questionBank[i].option1);
 
-	option.attr("type","radio")
-		  .attr("name",questionBank[i].name)
-		  .attr("id",questionBank[i].option1);
+	// option.attr("type","radio")
+	// 	  .attr("name",questionBank[i].name)
+	// 	  .attr("id",questionBank[i].option1);
 	
-	list.append(option);
-	list.append(label);
+	// list.append(option);
+	// list.append(label);
 
-	var option = $("<input>");
-	var label = $("<label>");
-	label.attr("for",questionBank[i].option2)
-		 .text(questionBank[i].option2);
+	// var option = $("<input>");
+	// var label = $("<label>");
+	// label.attr("for",questionBank[i].option2)
+	// 	 .text(questionBank[i].option2);
 
-	option.attr("type","radio")
-		  .attr("name",questionBank[i].name)
-		  .attr("id",questionBank[i].option2);
+	// option.attr("type","radio")
+	// 	  .attr("name",questionBank[i].name)
+	// 	  .attr("id",questionBank[i].option2);
 	
-	list.append(option);
-	list.append(label);
+	// list.append(option);
+	// list.append(label);
 
-	var option = $("<input>");
-	var label = $("<label>");
-	label.attr("for",questionBank[i].option3)
-		 .text(questionBank[i].option3);
+	// var option = $("<input>");
+	// var label = $("<label>");
+	// label.attr("for",questionBank[i].option3)
+	// 	 .text(questionBank[i].option3);
 
-	option.attr("type","radio")
-			.attr("name",questionBank[i].name)
-			.attr("id",questionBank[i].option3);
+	// option.attr("type","radio")
+	// 		.attr("name",questionBank[i].name)
+	// 		.attr("id",questionBank[i].option3);
 	
-	list.append(option);
-	list.append(label);
+	// list.append(option);
+	// list.append(label);
 
-	var option = $("<input>");
-	var label = $("<label>");
-	label.attr("for",questionBank[i].option4)
-		 .text(questionBank[i].option4);
+	// var option = $("<input>");
+	// var label = $("<label>");
+	// label.attr("for",questionBank[i].option4)
+	// 	 .text(questionBank[i].option4);
 		 
-	option.attr("type","radio")
-			.attr("name",questionBank[i].name)
-			.attr("id",questionBank[i].option4);
+	// option.attr("type","radio")
+	// 		.attr("name",questionBank[i].name)
+	// 		.attr("id",questionBank[i].option4);
 	
-	list.append(option);
-	list.append(label);
+	// list.append(option);
+	// list.append(label);
 	
+	// $("form ol").append(list);
+
+	var groupID = i;
+	for (var j = 1; j <=numOptions; j++) {
+		var option = $("<input>");
+		var label = $("<label>");
+		//optionNum will be either option1,option2,option3,option4
+		var optionNum = "option"+j;
+		label.attr("for",groupID+optionNum)
+			 .text(questionBank[i][optionNum]);
+		option.attr("type","radio")
+		  .attr("name",groupID)
+		  .attr("value",questionBank[i][optionNum])
+		  .attr("id",groupID+optionNum)
+		  .attr("class","options");
+		list.append(option);
+		list.append(label);
+	}
+
 	$("form ol").append(list);
 
+  }
 }
-}
-addQuestion();
 
 function startEventListener(){
 	$("#startButton").on("click",function(){
@@ -78,6 +96,19 @@ function startEventListener(){
 	});
 }
 
+// function startAnswerListener(){
+// 	$(".options").on("click",function(){
+// // 		this cha name is index of question
+// 	// $('input[name=]:checked').val();
+// // 		use that index to get the questionbank object
+// // 		check the index of correct answer
+// // 		concat that to "option"
+// // 		if that string is same as the value 
+// // 		of selected radio button then increment counter
+
+// 	});
+// }
+// startAnswerListener();
 function resetGameEventListener(){
 	$(".reset").on("click",function(){
 		location.reload();
@@ -123,4 +154,11 @@ function stop() {
     //  Clears runTimer
     clearInterval(runTimer);
 }
+
+function startGame(){
+	firstDisplay();
+	addQuestion();
+	startAnswerListener();
+}
+startGame();
 
