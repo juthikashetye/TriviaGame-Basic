@@ -10,80 +10,46 @@ function firstDisplay(){
 	startEventListener();
 }
 
+function generateLabel(optionNum, groupID, questionObj){
+	var label = $("<label>");
+	label.attr("for",groupID+optionNum)
+		 .text(questionObj[optionNum]);
+	return label;
+}
+
+function generateOption(optionNum, groupID){
+	var option = $("<input>");
+	option.attr("type","radio")
+		  .attr("name",groupID)
+		  .attr("id",groupID+optionNum)
+		  .attr("class","options");
+	return option;
+}
 function addQuestion(){
   for (var i = 0; i < questionBank.length; i++) {
 	var list = $("<li>");
 	list.html(questionBank[i].question + "<br>");
 
-	// var option = $("<input>");
-	// var label = $("<label>");
-	// label.attr("for",questionBank[i].option1)
-	// 	 .text(questionBank[i].option1);
-
-	// option.attr("type","radio")
-	// 	  .attr("name",questionBank[i].name)
-	// 	  .attr("id",questionBank[i].option1);
-	
-	// list.append(option);
-	// list.append(label);
-
-	// var option = $("<input>");
-	// var label = $("<label>");
-	// label.attr("for",questionBank[i].option2)
-	// 	 .text(questionBank[i].option2);
-
-	// option.attr("type","radio")
-	// 	  .attr("name",questionBank[i].name)
-	// 	  .attr("id",questionBank[i].option2);
-	
-	// list.append(option);
-	// list.append(label);
-
-	// var option = $("<input>");
-	// var label = $("<label>");
-	// label.attr("for",questionBank[i].option3)
-	// 	 .text(questionBank[i].option3);
-
-	// option.attr("type","radio")
-	// 		.attr("name",questionBank[i].name)
-	// 		.attr("id",questionBank[i].option3);
-	
-	// list.append(option);
-	// list.append(label);
-
-	// var option = $("<input>");
-	// var label = $("<label>");
-	// label.attr("for",questionBank[i].option4)
-	// 	 .text(questionBank[i].option4);
-		 
-	// option.attr("type","radio")
-	// 		.attr("name",questionBank[i].name)
-	// 		.attr("id",questionBank[i].option4);
-	
-	// list.append(option);
-	// list.append(label);
-	
-	// $("form ol").append(list);
-
 	var groupID = i;
 	for (var j = 1; j <=numOptions; j++) {
-		var option = $("<input>");
-		var label = $("<label>");
 		//optionNum will be either option1,option2,option3,option4
 		var optionNum = "option"+j;
-		label.attr("for",groupID+optionNum)
-			 .text(questionBank[i][optionNum]);
-		option.attr("type","radio")
-		  .attr("name",groupID)
-		  // .attr("value",questionBank[i][optionNum])
-		  .attr("id",groupID+optionNum)
-		  .attr("class","options");
-		  if (questionBank[i][optionNum]==questionBank[i].correctAnswer) {
-		  	option.attr("value","correct");
-		  }else(option.attr("value","incorrect"))
+
+		var option = generateOption(optionNum, groupID);
+		var label = generateLabel(optionNum, groupID, questionBank[i]);
+		
+		var currentValue = questionBank[i][optionNum];
+		var correctAnswer = questionBank[i].correctAnswer;
+
+		if ( currentValue == correctAnswer) 
+			option.attr("value","correct");
+		else
+			option.attr("value","incorrect");
+
 		list.append(option);
 		list.append(label);
 	}
+	list.attr("data-value",0);
 
 	$("form ol").append(list);
 
@@ -101,23 +67,35 @@ function startEventListener(){
 
 function startAnswerListener(){
 	$(".options").on("click",function(){
-		
-  			var checkedInput= $(this).val();
-  			// var radioValue = $("input[name="*"]:checked").val();
+  			var checkedInput = $(this).attr("value");
+  			var parentList = $(this.parentElement);
+  			
 
   			if (checkedInput=="correct") {
-  				correctAns++;
-  				notAns = questionBank.length-(correctAns+wrongAns);
-
+  				if(parentList.attr("data-value") == 0){
+  					correctAns++;
+  					parentList.attr("data-value","correct");
+  				} else if(parentList.attr("data-value") == "incorrect"){
+  					wrongAns--;
+  					correctAns++;
+  					parentList.attr("data-value","correct");
+  				}
+  				
   			}else if(checkedInput=="incorrect"){
-  				wrongAns++;
-  				notAns = questionBank.length-(correctAns+wrongAns);
+  				if (parentList.attr("data-value") == 0) {
+  					wrongAns++;
+  					parentList.attr("data-value","incorrect");
+  				}else if (parentList.attr("data-value") == "correct") {
+  					wrongAns++;
+  					correctAns--;
+  					parentList.attr("data-value", "incorrect");
+  				}
   			}
-
+  			notAns = questionBank.length-(correctAns+wrongAns);
   	
   		
   		console.log(checkedInput);
-  		// console.log(radioValue);
+
   		
 });
 }
