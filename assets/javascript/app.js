@@ -1,7 +1,7 @@
-var countdown = 50;
+var countdown = 10;
 var correctAns = 0;
 var wrongAns = 0;
-var notAns = 0;
+var notAns = questionBank.length-(correctAns+wrongAns);
 var runTimer;
 var numOptions = 4;
 
@@ -75,9 +75,12 @@ function addQuestion(){
 			 .text(questionBank[i][optionNum]);
 		option.attr("type","radio")
 		  .attr("name",groupID)
-		  .attr("value",questionBank[i][optionNum])
+		  // .attr("value",questionBank[i][optionNum])
 		  .attr("id",groupID+optionNum)
 		  .attr("class","options");
+		  if (questionBank[i][optionNum]==questionBank[i].correctAnswer) {
+		  	option.attr("value","correct");
+		  }else(option.attr("value","incorrect"))
 		list.append(option);
 		list.append(label);
 	}
@@ -96,8 +99,28 @@ function startEventListener(){
 	});
 }
 
-// function startAnswerListener(){
-// 	$(".options").on("click",function(){
+function startAnswerListener(){
+	$(".options").on("click",function(){
+		
+  			var checkedInput= $(this).val();
+  			// var radioValue = $("input[name="*"]:checked").val();
+
+  			if (checkedInput=="correct") {
+  				correctAns++;
+  				notAns = questionBank.length-(correctAns+wrongAns);
+
+  			}else if(checkedInput=="incorrect"){
+  				wrongAns++;
+  				notAns = questionBank.length-(correctAns+wrongAns);
+  			}
+
+  	
+  		
+  		console.log(checkedInput);
+  		// console.log(radioValue);
+  		
+});
+}
 // // 		this cha name is index of question
 // 	// $('input[name=]:checked').val();
 // // 		use that index to get the questionbank object
@@ -106,9 +129,6 @@ function startEventListener(){
 // // 		if that string is same as the value 
 // // 		of selected radio button then increment counter
 
-// 	});
-// }
-// startAnswerListener();
 function resetGameEventListener(){
 	$(".reset").on("click",function(){
 		location.reload();
