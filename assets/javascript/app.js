@@ -5,8 +5,10 @@ var notAns = questionBank.length - (correctAns + wrongAns);
 var runTimer;
 var numOptions = 4;
 
+
+
 function firstDisplay() {
-  $("#time, form").hide();
+  $("#time, form, resultDiv").hide();
   startEventListener();
 }
 
@@ -91,6 +93,15 @@ function startAnswerListener() {
   });
 }
 
+function createResultSection(){
+	var result = $("<p>" + "<p>" + "<p>");
+    var resetButton = $("<button>").addClass("reset").text("Play Again");
+    result.eq(0).text("Correct answers : " + correctAns);
+    result.eq(1).text("Inorrect answers : " + wrongAns);
+    result.eq(2).text("Unanswered : " + notAns);
+    $(".resultDiv").append(result, resetButton);
+}
+
 function resetGameEventListener() {
   $(".reset").on("click", function() {
     location.reload();
@@ -118,15 +129,9 @@ function timer() {
     stop();
 
     $("#time, form, #startButton").hide();
+    $(".resultDiv").show();
 
-    //Create 'p' tags with updated text
-    //and append to content div
-    var result = $("<p>" + "<p>" + "<p>");
-    var resetButton = $("<button>").addClass("reset").text("Play Again");
-    result.eq(0).text("Correct answers : " + correctAns);
-    result.eq(1).text("Inorrect answers : " + wrongAns);
-    result.eq(2).text("Unanswered : " + notAns);
-    $("#content").append(result, resetButton);
+    createResultSection();
     resetGameEventListener();
   }
 }
