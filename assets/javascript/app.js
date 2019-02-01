@@ -1,4 +1,4 @@
-var countdown = 10;
+var countdown = 50;
 var correctAns = 0;
 var wrongAns = 0;
 var notAns = questionBank.length - (correctAns + wrongAns);
@@ -26,6 +26,7 @@ function addQuestion() {
       var optionNum = "option" + j;
 
       label.attr("for", groupID + optionNum)
+           .attr("class", "form-check-label")
         .text(questionBank[i][optionNum]);
 
       option.attr("type", "radio")
