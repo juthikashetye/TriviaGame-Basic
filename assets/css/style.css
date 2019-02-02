@@ -1,5 +1,5 @@
 .container {
-	background-color: rgba(180, 166, 151,0.9);
+	background-color: rgba(180, 166, 151, 0.9);
 }
 
 body {
@@ -8,7 +8,13 @@ body {
 	background-size: cover;
 	background-repeat: repeat;
 	width: 100%;
-	color: rgb(51,26,0);
+	color: rgb(51, 26, 0);
+}
+
+h1 {
+	font-family: 'Emilys Candy', cursive;
+	font-size: 450%;
+	color: rgb(69, 107, 0);
 }
 
 button {
@@ -17,27 +23,34 @@ button {
 	padding-left: 5%;
 	padding-top: 2%;
 	padding-bottom: 2%;
-	background-color: rgb(51,26,0);
-	color: rgb(255,255,255);
-	border-radius:10%;
+	background-color: rgb(51, 26, 0);
+	color: rgb(255, 255, 255);
+	border-radius: 10%;
 	font-size: 110%;
 }
 
-input[type="radio"],label, button:hover {
+button:hover {
+	background-color: rgba(51, 26, 0, 0.7);
+}
+
+input[type="radio"],
+label,
+button:hover {
 	cursor: pointer;
 }
 
 #time {
-	font-size: 170%;
-	color: rgb(0,0,0);
+	font-size: 200%;
+	color: rgb(0, 0, 0);
 }
 
 #time span {
-	color: rgb(255,0,0);
+	color: rgb(255, 0, 0);
 }
+
 ol {
 	list-style-position: inside;
-	font-size: 150%;
+	font-size: 180%;
 }
 
 input {
@@ -54,9 +67,35 @@ label {
 }
 
 .resultDiv {
-	font-size: 140%;
+	font-size: 170%;
 }
 
- .reset {
- 	font-size: 80%;
+.reset {
+	font-size: 80%;
+}
+
+@media screen and (max-width: 640px) {
+	body {
+		font-size: 14px;
+	}
+	h1,
+	form,
+	.resultDiv,
+	.container {
+		padding: 0px;
+	}
+	.content {
+		margin: 0px;
+		padding: 0px;
+	}
+	input,
+	label {
+		display: block;
+	}
+	input {
+		margin-top: 6%;
+	}
+	label {
+		text-align: left;
+	}
 }

@@ -14,7 +14,6 @@ function addQuestion() {
   for (var i = 0; i < questionBank.length; i++) {
     var list = $("<li>");
     list.html(questionBank[i].question + "<br>");
-
     var groupID = i;
 
     for (var j = 1; j <= numOptions; j++) {
@@ -26,13 +25,12 @@ function addQuestion() {
       var optionNum = "option" + j;
 
       label.attr("for", groupID + optionNum)
-           .attr("class", "form-check-label")
-        .text(questionBank[i][optionNum]);
+           .text(questionBank[i][optionNum]);
 
       option.attr("type", "radio")
-        .attr("name", groupID)
-        .attr("id", groupID + optionNum)
-        .attr("class", "options");
+            .attr("name", groupID)
+            .attr("id", groupID + optionNum)
+            .attr("class", "options");
 
       var currentValue = questionBank[i][optionNum];
       var correctAnswer = questionBank[i].correctAnswer;
@@ -96,7 +94,7 @@ function createResultSection() {
   var result = $("<p>" + "<p>" + "<p>");
   var resetButton = $("<button>").addClass("reset").text("Play Again");
   result.eq(0).text("Correct answers : " + correctAns);
-  result.eq(1).text("Inorrect answers : " + wrongAns);
+  result.eq(1).text("Incorrect answers : " + wrongAns);
   result.eq(2).text("Unanswered : " + notAns);
   $(".resultDiv").append(result, resetButton);
 }
