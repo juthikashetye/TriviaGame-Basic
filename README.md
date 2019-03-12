@@ -6,6 +6,7 @@
 * The content of the game is completely responsive.
 * The game can be played on moblie phones, touchscreens, desktops and devices with a mouse.
 * Hope you enjoy my game!
+* [Link to Trivia Quiz](https://juthikashetye.github.io/TriviaGame-Basic/)
 
 ## Actions
 
